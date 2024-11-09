@@ -1,540 +1,650 @@
-// 定义分类和网站链接的字典
-const LINKS = {
-	常用网站: {
-		Google: 'https://www.google.com/?hl=en-US',
-		Bing: 'https://www.bing.com/?setmkt=en-US&setlang=en-US',
-		DuckDuckGo: 'https://duckduckgo.com/',
-		'Brave Search': 'https://search.brave.com/',
-		YouTube: 'https://www.youtube.com',
-		GitHub: 'https://www.github.com',
-		Cloudflare: 'https://dash.cloudflare.com',
-		'OpenAI ChatGPT': 'https://chatgpt.com',
-		'DuckDuckGo AI Chat': 'https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1',
-	},
-	视频网站: {
-		YouTube: 'https://www.youtube.com',
-		Netflix: 'https://www.netflix.com',
-		TikTok: 'https://www.tiktok.com',
-		爱奇艺: 'https://www.iqiyi.com',
-		腾讯视频: 'https://v.qq.com',
-		优酷: 'https://www.youku.com',
-		哔哩哔哩: 'https://www.bilibili.com',
-		搜狐视频: 'https://tv.sohu.com/',
-	},
-	AI工具: {
-		'OpenAI ChatGPT': 'https://chatgpt.com',
-		'Google Gemini': 'https://gemini.google.com/',
-		'Google AI Studio': 'https://aistudio.google.com/app/prompts/new_chat',
-		'Anthropic Claude': 'https://claude.ai/',
-		'Cohere Command R+': 'https://coral.cohere.com/',
-		'AI21Studio Jamba': 'https://studio.ai21.com/v2/chat',
-		'Mistral Large2': 'https://chat.mistral.ai/chat',
-		HuggingChat: 'https://huggingface.co/chat/',
-		'pi.ai': 'https://pi.ai/',
-		'DuckDuckGo AI Chat': 'https://duckduckgo.com/?q=DuckDuckGo+AI+Chat&ia=chat&duckai=1',
-		Zapier: 'https://zapier.com/',
-		ChatLabs: 'https://labs.writingmate.ai/',
-		Groq: 'https://groq.com/',
-		'Groq Playground': 'https://console.groq.com/playground',
-		coze国际: 'https://www.coze.com/',
-		'coze中国(扣子)': 'https://www.coze.cn/',
-		灵沐AI: 'https://chat.immuseai.com/',
-		Peo: 'https://poe.com/',
-		'ChatBot Arena': 'https://lmarena.ai/',
-		OpenRouter: 'https://openrouter.ai/',
-		'Not Diamond': 'https://chat.notdiamond.ai/',
-		AskManyAI: 'https://askmanyai.cn/',
-		通义千问: 'https://tongyi.aliyun.com/',
-		文心一言: 'https://yiyan.baidu.com/',
-		智谱清言: 'https://chatglm.cn/detail',
-		'百川智能-百小应': 'https://ying.baichuan-ai.com/chat',
-		'360智脑': 'https://ai.360.com/?src=chat-m',
-		YAYI雅意: 'https://yayi.wenge.com/chat/#/chat/21',
-		腾讯元宝: 'https://yuanbao.tencent.com/chat',
-		'澜舟科技-孟子GPT': 'https://www.langboat.com/zh/product/mchat',
-		'商汤-商量': 'https://chat.sensetime.com/wb/chat',
-		'360AI助手': 'https://bot.360.com/',
-		小悟空: 'https://wukong.com/',
-		酷盖AI: 'https://gpt33.cn/',
-	},
-	AI搜索: {
-		'Microsoft Copilot': 'https://copilot.microsoft.com/',
-		'Bing search Copilot': 'https://www.bing.com/chat?q=Microsoft+Copilot&FORM=hpcodx',
-		'Skype Copilot': 'https://web.skype.com/',
-		YouChat: 'https://you.com/?chatMode=default',
-		Felo: 'https://felo.ai/zh-Hans/search',
-		ThinkAny: 'https://thinkany.ai/',
-		Phind: 'https://www.phind.com/',
-		Perplexity: 'https://www.perplexity.ai/',
-		Kimi: 'https://kimi.moonshot.cn/',
-		豆包: 'https://www.doubao.com/chat/',
-		讯飞星火: 'https://xinghuo.xfyun.cn/',
-		天工AI: 'https://www.tiangong.cn/',
-		'360AI搜索': 'https://www.sou.com/',
-		海螺AI: 'https://hailuoai.com/',
-		秘塔AI搜索: 'https://metaso.cn/',
-		百度AI助手: 'https://chat.baidu.com/',
-		跃问: 'https://yuewen.cn/chats/new',
-		在问AI: 'https://www.zaiwen.top/index',
-	},
-	AI模型部署工具: {
-		Ollama: 'https://ollama.com/',
-		Jan: 'https://jan.ai/',
-		'LM Studio': 'https://lmstudio.ai/',
-		GPT4All: 'https://www.nomic.ai/gpt4all',
-		Sanctum: 'https://sanctum.ai/',
-		AnythingLLM: 'https://anythingllm.com/',
-	},
-	开源AI模型下载: {
-		'Hugging Face': 'https://huggingface.co/models',
-		'HF-Mirror': 'https://hf-mirror.com/',
-		'阿里魔搭-ModelScope': 'https://www.modelscope.cn/home',
-		'始智AI-WiseModel': 'https://wisemodel.cn/models',
-		'Gitee AI': 'https://ai.gitee.com/',
-		'Nexa AI': 'https://nexaai.com/models',
-	},
-	免费的代理工具: {
-		'WARP 下载线路1': 'https://one.one.one.one/',
-		'WARP 下载线路2': 'https://developers.cloudflare.com/warp-client/get-started/',
-		'Proton VPN': 'https://protonvpn.com/',
-		'VPN Gate': 'https://www.vpngate.net/cn/',
-		'Tor(需配置网桥地址)': 'https://www.torproject.org/',
-	},
-	开源的代理工具: {
-		'v2rayN-Pro': 'https://github.com/lowercase78/V2RayN-PRO',
-		v2rayN: 'https://github.com/2dust/v2rayN',
-		'hiddify-next': 'https://github.com/hiddify/hiddify-next',
-		'NekoRay PC版': 'https://github.com/MatsuriDayo/nekoray',
-		'GUI.for.SingBox': 'https://github.com/GUI-for-Cores/GUI.for.SingBox',
-		'GUI.for.Clash': 'https://github.com/GUI-for-Cores/GUI.for.Clash',
-		'Clash Verge rev': 'https://github.com/clash-verge-rev/clash-verge-rev',
-		'Clash Nyanpasu': 'https://github.com/LibNyanpasu/clash-nyanpasu',
-		FlClash: 'https://github.com/chen08209/FlClash',
-		'Pandora-Box': 'https://github.com/snakem982/Pandora-Box',
-		Karing: 'https://github.com/KaringX/karing',
-		'Clah.Mata 安卓版': 'https://github.com/MetaCubeX/ClashMetaForAndroid',
-		'v2rayNG 安卓版': 'https://github.com/2dust/v2rayNG',
-		'MahsaNG 安卓版': 'https://github.com/GFW-knocker/MahsaNG',
-		'Neko_v2rayNG 安卓版': 'https://github.com/Blawuken/Neko_v2rayNG',
-		'NekoBox 安卓版': 'https://github.com/MatsuriDayo/NekoBoxForAndroid',
-		'V2free 安卓版': 'https://github.com/bannedbook/v2ray.vpn',
-		'v2flyNG 安卓版': 'https://github.com/2dust/v2flyNG',
-		'shadowsocksr-v2ray-trojan-android': 'https://github.com/xxf098/shadowsocksr-v2ray-trojan-android',
-		'Clash Verge v1.3.8(断更版)': 'https://github.com/zzzgydi/clash-verge/releases/tag/v1.3.8',
-		'hiddify 旧版(可换内核)': 'https://github.com/hiddify/HiddifyClashDesktop',
-		'clash for windows汉化版': 'https://github.com/Z-Siqi/Clash-for-Windows_Chinese',
-		'clash for windows原英文版': 'https://archive.org/download/clash_for_windows_pkg',
-	},
-	社交平台: {
-		Facebook: 'https://www.facebook.com',
-		Twitter: 'https://www.twitter.com',
-		LinkedIn: 'https://www.linkedin.com',
-		Instagram: 'https://www.instagram.com',
-		reddit: 'https://www.reddit.com',
-		Discord: 'https://discord.com/',
-		Quora: 'https://www.quora.com/',
-		微博: 'https://weibo.com/',
-		知乎: 'https://www.zhihu.com/',
-	},
-	电子邮箱: {
-		Gmail: 'https://mail.google.com/',
-		Outlook: 'https://outlook.live.com/',
-		'Proton Mail': 'https://proton.me/',
-		'Tuta Mail': 'https://tuta.com/',
-		'iCloud Mail': 'https://www.icloud.com/mail',
-		'163邮箱': 'https://mail.163.com/',
-		QQ邮箱: 'https://mail.qq.com/',
-		'[临时]temp-mail.org': 'https://temp-mail.org/en/',
-		'[临时]tempmailo.com': 'https://tempmailo.com/',
-		'[临时]temp-mail.io': 'https://temp-mail.io/en',
-		'[临时]mail.tm': 'https://mail.tm/zh/',
-		'[临时]tempmail.plus': 'https://tempmail.plus/',
-		'[临时]maillog.org': 'https://maillog.org/',
-		'[临时]upxmail.com': 'https://upxmail.com',
-		'[临时]tempmail.ac.id': 'https://tempmail.ac.id',
-		'[临时]internxt.com': 'https://internxt.com/zh/temporary-email',
-		'[临时]mohmal.com': 'https://www.mohmal.com/en/inbox',
-		'[临时]tmailor.com': 'https://tmailor.com',
-		'[临时]tempmail.us.com': 'https://www.tempmail.us.com/zh/',
-		'[临时]disposablemail.com': 'https://www.disposablemail.com/',
-		'[临时]luxusmail.org': 'https://luxusmail.org/',
-		'[临时]gettempmail.com': 'https://gettempmail.com/mailbox',
-		'[临时]temp-inbox.me': 'https://temp-inbox.me/',
-		'[临时]anonymmail.net': 'https://anonymmail.net/',
-		'[临时]emailfake.com': 'https://emailfake.com/',
-		'[临时]crazymailing.com': 'https://www.crazymailing.com/',
-	},
+// 定义config对象，包含搜索引擎模板
+/*
+const config = {
+  title: "网站标题",
+  subtitle: "网站描述",
+  // 其他配置...
+  searchengine: [
+      { name: "百度", template: "https://www.baidu.com/s?wd=$s" },
+      { name: "谷歌", template: "https://www.google.com/search?q=$s" },
+      { name: "必应", template: "https://www.bing.com/search?q=$s" },
+      { name: "搜狗", template: "https://www.sogou.com/web?query=$s" }
+  ]
 };
-// 网站标题（网站名称）
-const WEBSITE_TITLE = '我的网址导航';
+*/
 
-// 获取LINKS的第一个内部字典(第一个分类)
-function getFirstInnerDict(outerDict) {
-	for (let key in outerDict) {
-		if (outerDict.hasOwnProperty(key)) {
-			return outerDict[key]; // 返回第一个内部字典
-		}
-	}
-	return null; // 如果外部对象为空，返回 null
-}
+
+addEventListener('fetch', event => {
+	event.respondWith(handleRequest(event.request));
+});
 
 async function handleRequest(request) {
-	// 获取LINKS的第一个内部字典，即第一个分类（常用网站）
-	const firstInnerDict = getFirstInnerDict(LINKS);
-	// 如果第一个内部字典为空
-	if (firstInnerDict == null) {
-		return new Response('LINKS变量的值有问题！', {
-			headers: { 'content-type': 'text/html;charset=UTF-8' },
+	const { pathname } = new URL(request.url);
+
+	if (pathname === '/') {
+		return new Response(await renderNavigationPage(), {
+			headers: { 'Content-Type': 'text/html; charset=utf-8' },
 		});
 	}
 
-	// 动态生成左侧分类名称
-	let categoriesHtml = "<div class='categories'>";
-	for (const category of Object.keys(LINKS)) {
-		categoriesHtml += `<div class="category" onclick="showLinks('${category}')">${category}</div>`;
+	if (pathname === '/data') {
+		const navigationData = await getNavigationData();
+		return new Response(JSON.stringify(navigationData), {
+			headers: { 'Content-Type': 'application/json; charset=utf-8' },
+		});
 	}
-	categoriesHtml += '</div>';
 
-	// 动态生成初始右侧链接列表（默认显示常用网站）
-	let linksHtml = "<div class='links-container'>";
-	for (const [name, url] of Object.entries(firstInnerDict)) {
-		linksHtml += `<div><a href="${url}" target="_blank">${name}</a></div>`;
+	if (pathname === '/add-category' && request.method === 'POST') {
+		const requestBody = await request.json();
+		const navigationData = await getNavigationData();
+		const newCategory = { name: requestBody.name, sites: [] };
+		navigationData.categories.push(newCategory);
+		await setNavigationData(navigationData);
+		return new Response(JSON.stringify({ message: 'Category added successfully' }), {
+			headers: { 'Content-Type': 'application/json; charset=utf-8' },
+		});
 	}
-	linksHtml += '</div>';
 
-	// HTML 页面内容，包含固定布局、搜索框和交互逻辑
-	const htmlContent = `
-<!DOCTYPE html>
-<html>
-<head>
-    <title>${WEBSITE_TITLE}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {  
-            width: 100vw; 
-            padding: 0;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
+	if (pathname === '/add-site' && request.method === 'POST') {
+		const requestBody = await request.json();
+		const navigationData = await getNavigationData();
+		const { categoryIndex, siteName, siteUrl, siteIcon } = requestBody;
+		navigationData.categories[categoryIndex].sites.push({ name: siteName, url: siteUrl, icon: siteIcon });
+		await setNavigationData(navigationData);
+		return new Response(JSON.stringify({ message: 'Site added successfully' }), {
+			headers: { 'Content-Type': 'application/json; charset=utf-8' },
+		});
+	}
 
-        /* 固定左侧导航栏 */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 280px;
-            height: 100vh;
-            background-color: #FAFAFA;
-            overflow-y: auto;
-            text-align: center;
-			border-left: none;
-            border-right: 1px solid #ccc;
-            transition: width 0.3s ease;
-            z-index: 1000;
-        }
+	if (pathname === '/delete-category' && request.method === 'POST') {
+		const requestBody = await request.json();
+		const navigationData = await getNavigationData();
+		const { categoryIndex } = requestBody;
+		navigationData.categories.splice(categoryIndex, 1);
+		await setNavigationData(navigationData);
+		return new Response(JSON.stringify({ message: 'Category deleted successfully' }), {
+			headers: { 'Content-Type': 'application/json; charset=utf-8' },
+		});
+	}
 
-        /* 容器调整，避免被导航栏覆盖 */
-        .container {
-            margin-left: 280px;
-            padding: 0;
-            display: block;
-            max-width: calc(100% - 280px);
-            min-width: 300px;
-        }
+	if (pathname === '/delete-site' && request.method === 'POST') {
+		const requestBody = await request.json();
+		const navigationData = await getNavigationData();
+		const { categoryIndex, siteIndex } = requestBody;
+		navigationData.categories[categoryIndex].sites.splice(siteIndex, 1);
+		await setNavigationData(navigationData);
+		return new Response(JSON.stringify({ message: 'Site deleted successfully' }), {
+			headers: { 'Content-Type': 'application/json; charset=utf-8' },
+		});
+	}
 
-        /* 标题样式 */
-        .sidebar h1 {
-            margin-top: 40px;
-            margin-bottom: 30px;
-            font-size: 24px;
-            color: #333;
-        }
+	if (pathname === '/edit-site' && request.method === 'POST') {
+		const requestBody = await request.json();
+		const navigationData = await getNavigationData();
+		const { categoryIndex, siteIndex, siteName, siteUrl, siteIcon } = requestBody;
+		navigationData.categories[categoryIndex].sites[siteIndex] = { name: siteName, url: siteUrl, icon: siteIcon };
+		await setNavigationData(navigationData);
+		
+		return new Response(JSON.stringify({ message: 'Site updated successfully' }), {
+			headers: { 'Content-Type': 'application/json; charset=utf-8' },
+		});
+	}
 
-        .category {
-            margin-top: 5px;
-            margin-bottom: 5px;
-            line-height: 2em;
-            cursor: pointer;
-            font-weight: bold;
-            color: #333300;
-        }
-        .category:hover {
-            color: #999933;
-        }
+	return new Response('Not Found', { status: 404 });
+}
 
-        /* 右侧搜索框样式 */
-        .search-bar {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            min-width: 150px;
-            transition: none;
-        }
+async function getNavigationData() {
+	const data = await NAVIGATION_DATA.get('data');
+	return data ? JSON.parse(data) : { categories: [] };
+}
 
-        /* 右侧内容区域 */
-        .content {
-            padding: 20px;
-            box-sizing: border-box;
-            border-left: 1px solid #ccc;
-			border-right: none;
-            border-top: none;
-            border-bottom: none;
-        }
+async function setNavigationData(data) {
+	await NAVIGATION_DATA.put('data', JSON.stringify(data));
+}
 
-        /* 链接的布局 */
-        .links-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            line-height: 32px;
-            align-items: center;
-        }
-        .links-container div {
-            width: calc(20% - 10px);
-        }
+async function renderNavigationPage() {
+	const navigationData = await getNavigationData();
+	let html = '<html><head><title>欢迎来到导航页</title>';
+	// 添加的代码
 
-        /* 链接样式 */
-        a {
-            text-decoration: none;
-            color: #000;
-            font-weight: bold;
-            display: block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-align: center;
-            text-overflow: ellipsis;
-            transition: color 0.3s ease;
-        }
+	/*
+	html = `
+	<style>
+		body {
+			font-family: 'Arial', sans-serif;
+			padding: 25px;
+			background-color: #e9ecef;
+			color: #212529;
+		}
+		.search-container {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		h2 {
+			color: #333;
+			font-size: 24px;
+			margin-bottom: 10px;
+		}
+		form {
+			display: inline-block;
+		}
+		select, input, button {
+			padding: 10px;
+			margin: 5px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			font-size: 16px;
+		}
+		button {
+			cursor: pointer;
+			background-color: #007bff;
+			color: white;
+			border: none;
+		}
+		button:hover {
+			background-color: #0056b3;
+		}
+	</style>
+	<div class="search-container">
+		<h2>搜索</h2>
+		<form id="searchForm">
+			<select id="searchEngine">
+				${config.searchengine.map(engine => `<option value="${engine.template}">${engine.name}</option>`).join('')}
+			</select>
+			<input type="text" id="searchInput" placeholder="输入搜索内容">
+			<button type="submit">搜索</button>
+		</form>
+	</div>
+	<script>
+		document.getElementById('searchForm').addEventListener('submit', function(event) {
+			event.preventDefault();
+			var searchEngine = document.getElementById('searchEngine').value;
+			var searchInput = document.getElementById('searchInput').value;
+			var searchUrl = searchEngine.replace('$s', encodeURIComponent(searchInput));
+			window.open(searchUrl, '_blank');
+	});
+	
+	</script>
+`;
 
-        /* 鼠标悬停显示下划线 */
-        a:hover {
-            color: #999933;
-            text-align: center;
-        }
 
-        /* 响应式设计 */
+*/
 
-		/* 超大屏幕设备（>1200px） */
-        @media (min-width: 1201px) {
-            .sidebar {
-                width: 300px;
+	// 添加的代码
+	html += `
+        <style>
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                padding: 20px;
+                background-color: #f4f4f9;
+                color: #333;
             }
-            .container {
-                margin-left: 300px;
-                max-width: calc(100% - 300px);
+			a {
+				text-decoration: none;
+				outline: none;
+				font-size: 25px;
+				margin-top: 10px;
+			}
+	
+            h2 {
+                color: #4A90E2;
+                font-size: 24px;
+                margin-bottom: 15px;
+                border-bottom: 2px solid #4A90E2;
+                padding-bottom: 5px;
             }
-            .sidebar h1 {
-                font-size: 26px;
+			.ca-title {
+				padding: 0;
+			
+			}
+            ul {
+                list-style-type: none;
+                padding-left: 0;
+                display: flex;
+                flex-wrap: wrap;
+
             }
-            .category {
+
+            li {
+				margin: 10px;
+				 padding: 10px;
+				background-color: #ffffff;
+				border-radius: 5px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				align-items: center;
+				width: calc(10% - 20px);
+				box-sizing: border-box;
+				vertical-align: middle;
+            }
+
+            form {
+				margin: 0;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            input,select, button {
+                padding: 10px;
+                margin-right: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
                 font-size: 16px;
             }
-            .search-bar {
-                padding: 12px;
-            }
-            .content {
-                padding: 25px;
-            }
-            .links-container div {
-                width: calc(20% - 10px); /* 每行显示5个链接 */
-            }
-        }
+			
+			.delete-ca-btn {
+				margin: 0 0 3px 10px;
+				padding: 0;
+				background-color: #f4f4f9;
+				border: none;
+				vertical-align: middle;
+				color: #000000;
+			}
+			.delete-ca-btn:hover {
+				color: #ee4b45;
+			}
+			
+			.add-site-btn {
+				margin: 0 0 3px 10px;
+				background-color: #f4f4f9;
+				color: black;
+				border: none;
+				vertical-align: middle;
+				padding: 0;
+			}
+			.add-site-btn:hover {
+				color: orange;
+			}
+			input:focus,
+			select:focus,
+			button:focus {
+				border-color: #4A90E2;
+				outline: none;
+			}
+	
 
-        /* 大屏幕设备（992px - 1200px） */
-        @media (max-width: 1200px) and (min-width: 992px) {
-            .sidebar {
-                width: 280px;
+            /* 模态框样式 */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0,0,0);
+                background-color: rgba(0,0,0,0.4);
+                padding-top: 60px;
             }
-            .container {
-                margin-left: 280px;
-                max-width: calc(100% - 280px);
-            }
-            .sidebar h1 {
-                font-size: 24px;
-            }
-            .category {
-                font-size: 15px;
-            }
-            .search-bar {
-                padding: 10px;
-            }
-            .content {
+
+            .modal-content {
+				position: absolute; /* 相对于包含它的相对定位元素进行定位 */
+				left: 50%; /* 左边距离父元素左边界的距离为父元素宽度的一半 */
+				top: 50%; /* 上边距离父元素上边界的距离为父元素高度的一半 */
+				transform: translate(-50%, -50%); /* 使用 transform 属性进行微调，使其完全居中 */
+                background-color: #fefefe;
+                margin: 5% auto;
                 padding: 20px;
-            }
-            .links-container div {
-                width: calc(33.33% - 10px); /* 每行显示3个链接 */
-            }
-        }
-
-        /* 中等屏幕设备（600px - 992px） */
-        @media (max-width: 991px) and (min-width: 600px) {
-            .sidebar {
-                width: 220px;
-            }
-            .container {
-                margin-left: 220px;
-                max-width: calc(100% - 220px);
-            }
-            .sidebar h1 {
-                font-size: 22px;
-            }
-            .category {
-                font-size: 14px;
-            }
-            .search-bar {
-                padding: 8px;
-            }
-            .content {
-                padding: 18px;
-            }
-            .links-container div {
-                width: calc(50% - 10px); /* 每行显示2个链接 */
-            }
-        }
-
-        /* 小屏幕设备（480px - 600px） */
-        @media (max-width: 599px) and (min-width: 480px) {
-            .sidebar {
-                width: 180px;
-            }
-            .container {
-                margin-left: 180px;
-                max-width: calc(100% - 180px);
-            }
-            .sidebar h1 {
-                font-size: 20px;
-            }
-            .category {
-                font-size: 13px;
-            }
-            .search-bar {
-                padding: 7px;
-            }
-            .content {
-                padding: 15px;
-            }
-            .links-container div {
-                width: 100%; /* 每行显示1个链接 */
-            }
-        }
-
-        /* 手机设备（480px以下） */
-        @media (max-width: 480px) {
-            .sidebar {
-                position: relative; /* 取消固定定位 */
-                width: 100%;
-                height: auto;
-                border-left: none;
-                border-right: none;
-                border-top: 2px solid #ccc;
-                border-bottom: 1px solid #ccc;
+                border: 1px solid #888;
+                width: 80%;
             }
 
-            .container {
-                margin-left: 0;
-                max-width: 100%;
-                display: flex;
-                flex-direction: column;
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
             }
 
-            .content {
-                padding: 10px;
-                border-left: none;
-                border-right: none;
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
             }
+			.item:hover {
+				transform: translateY(-8px);
+				box-shadow: 0 16px 32px rgba(10, 22, 41, .12);
+				transition: all .3s ease;
+				cursor: pointer;
+			}
+			//item-icon
+			.item-icon {
+				width: 70px; height: 70px;
+			}
+			//right click
+			.item {
+				position: relative;
+			}
+			.context-menu {
+				display: none;
+				position: absolute;
+				background: #fff;
+				border: 1px solid #ccc;
+				padding: 5px 0;
+				z-index: 1000;
+			}
+			
+			.context-menu-item {
+				padding: 5px 20px;
+				cursor: pointer;
+			}
+			
+			.context-menu-item:hover {
+				background: #f0f0f0;
+			}
+			.opts {
+				margin-top: 10px;
+			}
+			.opts-item {
+				margin: 0 5px;
+				
+				background-color: #fff;
+				border: none;
+			}
+			.opts-delete:hover {
+				color: red;
+			}
+			.opts-edit:hover {
+				color: #4A90E2;
+			}
+			.
+			.opts-add {
+				color: #f4f4f9;
+			}
+			.site-style {
+				color: #333;
+			}
+			.site-style:hover {
+				color: #ff6700;
+			}
 
-            .links-container div {
-                width: 100%; /* 每行显示1个链接 */
-            }
+        </style>
+        <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
+    `;
+	html += '</head><body>';
 
-            .search-bar {
-                width: 100%;
-                padding: 8px;
-            }
+	// 渲染添加分类表单
+	html += `
+        <h2>添加分类</h2>
+        <form id="addCategoryForm">
+            <input type="text" name="categoryName" placeholder="分类名称" required />
+            <button type="submit">添加</button>
+        </form>
+    `;
 
-            .sidebar h1 {
-                font-size: 18px;
-            }
-
-            .category {
-                font-size: 12px;
-            }
-
-            .content {
-                padding: 12px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <div class="sidebar">
-        <h1>${WEBSITE_TITLE}</h1>
-        ${categoriesHtml}
-    </div>
-    <div class="container">
-        <!-- 右侧内容区域 -->
-        <div class="content">
-            <!-- 搜索框 -->
-            <input type="text" id="searchInput" class="search-bar" placeholder="搜索本站的链接名称..." oninput="filterLinks()">
-            <div id="links">${linksHtml}</div>
+	// 渲染添加站点按钮和模态框
+	html += `
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="addSiteForm">
+                    <select class="addSelect" name="categoryIndex" required>
+                        ${navigationData.categories.map((category, index) => `<option value="${index}">${category.name}</option>`).join('')}
+                    </select>
+                    <input type="text" name="siteName" placeholder="站点名称" required />
+                    <input type="url" name="siteUrl" placeholder="站点链接" required />
+                    <input type="text" name="siteIcon" placeholder="图标（Iconify 图标名称）" required />
+                    <button type="submit">添加</button>
+                </form>
+            </div>
         </div>
-    </div>
+    `;
 
-    <script>
-        const linksData = ${JSON.stringify(LINKS)};
+	html += `
+        <div id="editSiteModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeEditModal()">&times;</span>
+                <h2>修改站点</h2>
+                <form id="editSiteForm">
+                    <input type="hidden" name="currentCategoryIndex" />
+                    <input type="hidden" name="siteIndex" />
+					<select name="categoryIndex" required>
+						${navigationData.categories.map((category, index) => `<option value="${index}">${category.name}</option>`).join('')}
+					</select>
+                    <input type="text" name="siteName" placeholder="站点名称" required />
+                    <input type="url" name="siteUrl" placeholder="站点链接" required />
+                    <input type="text" name="siteIcon" placeholder="图标（Iconify 图标名称）" required />
+                    <button type="submit">保存修改</button>
+                </form>
+            </div>
+        </div>
+    `;
 
-        // 根据类别显示对应的链接
-        function showLinks(category) {
-            const linksContainer = document.getElementById('links');
-            let linksHtml = "<div class='links-container'>";
-            for (const [name, url] of Object.entries(linksData[category])) {
-                linksHtml += \`<div><a href="\${url}" target="_blank">\${name}</a></div>\`;
-            }
-            linksHtml += "</div>";
-            linksContainer.innerHTML = linksHtml;
-        }
+	// 渲染分类和网站链接
+	navigationData.categories.forEach((category, categoryIndex) => {
+		html += `<h2 class="ca-title">${category.name}`;
+		// 添加删除分类按钮，放在分类名称右侧
+		html += `<button class = "delete-ca-btn"  onclick="deleteCategory(${categoryIndex})"><span class="iconify del-ca-iconify" data-icon = "material-symbols:delete-outline" data-inline="false" data-width="32px" data-height="32px"></span></button>
+        <button class="add-site-btn" onclick = "openAddModal(${categoryIndex})"><span class="iconify" data-icon="carbon:add-filled" data-inline="false" data-width="32px" data-height="32px" ></span></button>
+		</h2><ul>`;
+		category.sites.forEach((site, siteIndex) => {
+			html += `<li class="item">
+			<div class="item-icon" onclick= "openLink(event)" >
+				<span class="iconify" data-icon="${site.icon}" data-inline="false" data-width="80px" data-height="80px" ></span> 
+			</div>
+			<a id="link" class = "site-style" href="${site.url}" target="_blank">${site.name}</a>
+			<div class = "opts">
+				<button class="opts-item opts-delete" onclick="deleteSite(${categoryIndex}, ${siteIndex})"><span class="iconify" data-icon="material-symbols:delete-outline" data-inline="false" data-width="32px" data-height="32px" ></span></button>
+				<button class="opts-item opts-edit" onclick="openEditModal(${categoryIndex}, ${siteIndex}, '${site.name}', '${site.url}', '${site.icon}')"><span class="iconify" data-icon="raphael:edit" data-inline="false" data-width="32px" data-height="32px" ></span></button>
+			</div>
+          </li>`;
+		});
+		html += `</ul>`;
+	});
 
-        // 搜索框功能：根据关键词筛选链接
-        function filterLinks() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const linksContainer = document.getElementById('links');
-            let filteredLinksHtml = "<div class='links-container'>";
-            
-            // 遍历所有分类，找到匹配的链接
-            for (const category of Object.keys(linksData)) {
-                for (const [name, url] of Object.entries(linksData[category])) {
-                    if (name.toLowerCase().includes(input)) {
-                        filteredLinksHtml += \`<div><a href="\${url}" target="_blank">\${name}</a></div>\`;
-                    }
+	// 添加脚本
+	html += `
+        <script>
+		document.getElementById('addCategoryForm').addEventListener('submit', async function(event) {
+			event.preventDefault();
+			const categoryName = event.target.categoryName.value;
+			// 检查 categoryName 是否已存在于 navigationData 的 categories 中
+			let navigationData
+			try {
+				const response = await fetch('/data'); // 发送请求到服务器端的 '/data' 路径
+				if (response.ok) {
+					navigationData = await response.json(); // 解析响应的 JSON 数据
+					
+				} else {
+					console.error('Failed to fetch navigation data:', response.statusText);
+				}
+			} catch (error) {
+				console.error('Error fetching navigation data:', error);
+			}
+			const categoryExists = navigationData.categories.some(category => category.name === categoryName);
+			if (!categoryExists) {
+				// 发送 fetch 请求添加新分类
+				const response = await fetch('/add-category', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ name: categoryName })
+				});
+		
+				if (response.ok) {
+					// 如果请求成功，重新加载页面
+					location.reload();
+				} else {
+					// 处理请求失败的情况
+					console.error('Failed to add category:', response.statusText);
+				}
+			} else {
+				// 如果分类已存在，则显示提示信息
+				alert('该分类已经存在，请输入不同的分类名称。');
+			}
+		});
+		
+            document.getElementById('addSiteForm').addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const data = {
+                    categoryIndex: formData.get('categoryIndex'),
+                    siteName: formData.get('siteName'),
+                    siteUrl: formData.get('siteUrl'),
+                    siteIcon: formData.get('siteIcon')
+                };
+                const response = await fetch('/add-site', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (response.ok) location.reload();
+            });
+
+            function deleteCategory(categoryIndex) {
+                if (confirm('确定要删除该分类吗？')) {
+                    fetch('/delete-category', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ categoryIndex })
+                    }).then(response => {
+                        if (response.ok) location.reload();
+                    });
                 }
             }
 
-            filteredLinksHtml += "</div>";
-            linksContainer.innerHTML = filteredLinksHtml;
-        }
+            function deleteSite(categoryIndex, siteIndex) {
+                if (confirm('确定要删除该站点吗？')) {
+                    fetch('/delete-site', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ categoryIndex, siteIndex })
+                    }).then(response => {
+                        if (response.ok) location.reload();
+                    });
+                }
+            }
+			async function deleteSiteEasy(categoryIndex, siteIndex) {
+                   await fetch('/delete-site', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ categoryIndex, siteIndex })
+                    }).then(response => {
+                        if (response.ok) location.reload();
+                    });
+            }
+            async function addSiteAsync(data) {
+                await fetch('/add-site', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                }).then(response => {
+                    if (response.ok) location.reload();
+                });
+            }
 
-        // 页面加载时显示默认分类的链接（可选）
-        window.onload = function() {
-            const defaultCategory = Object.keys(linksData)[0];
-            showLinks(defaultCategory);
-        }
-    </script>
-</body>
-</html>
-`;
+            // 打开模态框
+            const modal = document.getElementById("myModal");
+            const span = document.getElementsByClassName("close")[0];
 
-	// 返回 HTML 内容
-	return new Response(htmlContent, {
-		headers: { 'content-type': 'text/html;charset=UTF-8' },
-	});
+             function openAddModal(categoryIndex) {
+                modal.style.display = "block";
+				document.querySelector(".addSelect").selectedIndex = categoryIndex;
+				
+            }
+
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            // 修改站点模态框
+            const editModal = document.getElementById("editSiteModal");
+
+            function openEditModal(categoryIndex, siteIndex, siteName, siteUrl, siteIcon) {
+                editModal.style.display = "block";
+                const form = document.getElementById('editSiteForm');
+				form.currentCategoryIndex.value = categoryIndex;
+                form.categoryIndex.value = categoryIndex;
+                form.siteIndex.value = siteIndex;
+                form.siteName.value = siteName;
+                form.siteUrl.value = siteUrl;
+                form.siteIcon.value = siteIcon;
+            }
+
+            function closeEditModal() {
+                editModal.style.display = "none";
+            }
+			function getAllData() {
+				// 发送 GET 请求
+				fetch('/data')
+  				.then(response => {
+    				// 将响应解析为 JSON 格式
+    				return response.json();
+  				})
+  				.then(data => {
+    				// 打印响应数据到控制台
+					// console.log("获取本地kv")
+    				console.log(data);
+  				})
+  				.catch(error => {
+   			 		// 处理错误
+   			 		console.error('Fetch 请求出错:', error);
+  				});
+
+			}
+            document.getElementById('editSiteForm').addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+				const curCaIndex = formData.get('currentCategoryIndex');
+				const selectedIndex = formData.get('categoryIndex');
+				const siteIndex = formData.get('siteIndex');
+                const data = {
+                    categoryIndex: formData.get('categoryIndex'),
+                    siteName: formData.get('siteName'),
+                    siteUrl: formData.get('siteUrl'),
+                    siteIcon: formData.get('siteIcon')
+                };
+
+				let response;
+				if(curCaIndex ===  selectedIndex ) {
+					data.siteIndex = siteIndex;
+					response = await fetch('/edit-site', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(data)
+					});
+				}else {
+                    
+					await deleteSiteEasy(curCaIndex, siteIndex)
+                    const resp = await fetch('/add-site', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    if (resp.ok) location.reload();               
+				}
+             
+                if (response.ok) location.reload();
+            });
+			function openLink(event) {
+				// 阻止默认事件，以防止 <a> 标签的默认行为
+				event.preventDefault();
+				// 获取当前点击的元素
+				var clickedElement = event.target;
+				// 如果点击的是 span 元素，将点击元素改为其父元素 div
+				if (clickedElement.tagName.toLowerCase() === 'span') {
+					clickedElement = clickedElement.parentElement;
+				}
+				// 获取 <a> 标签的链接
+				var link = clickedElement.closest('.item').querySelector('a').getAttribute('href');
+				// 在新标签页中打开链接
+				window.open(link, '_blank');
+			}
+			
+        </script>
+    `;
+    
+	html += '</body></html>';
+	return html;
 }
-
-export default {
-	async fetch(request, env, _ctx) {
-		return handleRequest(request);
-	},
-};
